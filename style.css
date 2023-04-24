@@ -7,3 +7,30 @@
     text-decoration: line-through;
   }
   
+  body {
+    background-color: #f8f8f8;
+    font-family: Arial, sans-serif;
+  }
+
+  .todo-heading {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  .todo-list {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  }
+  
+  .todo-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .todo-item:hover {
+    background-color: #f8f8f8;
+  }
+
+  
