@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production"
   },
+  
   "repository": {
     "type": "git",
     "url": "to-do-list"
