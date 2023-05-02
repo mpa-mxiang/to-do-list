@@ -19,8 +19,12 @@ h1 {
   font-size: 20px;
 }
 
+.fa {
+  font-size: 24px;
+}
+
 header,
-form{
+form {
   display: flex;
   justify-content: space-between;
 }
@@ -51,7 +55,7 @@ form{
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .task-list {
