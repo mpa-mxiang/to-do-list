@@ -1,0 +1,20 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "to-do-list"
+  },
+  "keywords": [
+    "todolist"
+  ],
+  "author": "Jiachun Xiang",
+  "license": "MIT"
+}
