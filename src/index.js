@@ -1,7 +1,6 @@
 const tasks = [
-    { description: 'Task 1', completed: false, index: 1 },
-    { description: 'Task 2', completed: true, index: 2 },
-    { description: 'Task 3', completed: false, index: 3 },
+    { description: 'wash the dishes', completed: false, index: 1 },
+    { description: 'complete To Do list project', completed: true, index: 2 },
   ];
   
   function renderTasks() {
@@ -11,8 +10,8 @@ const tasks = [
   
     tasks.forEach((task) => {
       const taskItem = document.createElement('li');
-      taskItem.textContent = task.description;
-  
+      taskItem.innerHTML += `<div class="square"></div> <p>${task.description}</p> <i class="fa">&#xf142;</i>`;
+
       if (task.completed) {
         taskItem.classList.add('completed');
       }
