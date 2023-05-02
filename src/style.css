@@ -72,13 +72,6 @@ form {
   align-items: center;
 }
 
-.square {
-  height: 18px;
-  width: 18px;
-  background-color: transparent;
-  border: 1px solid gray;
-}
-
 .completed {
   text-decoration: line-through;
   color: #ccc;

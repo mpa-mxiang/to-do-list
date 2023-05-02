@@ -12,7 +12,7 @@ function renderTasks() {
 
   tasks.forEach((task) => {
     const taskItem = document.createElement('li');
-    taskItem.innerHTML += `<div class="square"></div> <p>${task.description}</p> <i class="fa">&#xf142;</i>`;
+    taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed? 'checked' : ''}/><p>${task.description}</p> <i class="fa">&#xf142;</i>`;
 
     if (task.completed) {
       taskItem.classList.add('completed');
