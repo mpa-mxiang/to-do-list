@@ -7,7 +7,7 @@ export default function addTask(description) {
     completed: false,
     index: tasks.length + 1,
   };
-
+  console.log('hi')
   tasks.push(task);
   localStorage.setItem('tasks', JSON.stringify(tasks));
   renderTasks();

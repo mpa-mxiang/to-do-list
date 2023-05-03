@@ -46,4 +46,3 @@ export default function renderTasks() {
     todoList.appendChild(taskItem);
   });
 }
-renderTasks();
