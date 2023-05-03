@@ -1,13 +1,14 @@
 import tasks from './tasks.js';
 import renderTasks from './index.js';
-
+console.log("app!")
 export default function addTask(description) {
+  console.log("add!")
   const task = {
     description,
     completed: false,
     index: tasks.length + 1,
   };
-  console.log('hi')
+  console.log('hi');
   tasks.push(task);
   localStorage.setItem('tasks', JSON.stringify(tasks));
   renderTasks();

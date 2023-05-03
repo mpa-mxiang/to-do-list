@@ -1,12 +1,12 @@
 import tasks from './tasks.js';
 import './style.css';
 import './storage.js';
-
+console.log("index!")
 export default function renderTasks() {
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = ''; // clear previous items
   tasks.sort((a, b) => a.index - b.index);
-
+  console.log("render!");
   tasks.forEach((task, index) => {
     const taskItem = document.createElement('li');
     taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}/><p>${task.description}</p> <i class="fa">&#xf142;</i>`;
