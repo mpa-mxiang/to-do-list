@@ -7,27 +7,6 @@ function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-function toggleTaskCompletion(index) {
-  tasks[index].completed = !tasks[index].completed;
-  saveTasks();
-  renderTasks();
-}
-
-function editTask(index) {
-  const taskItem = document.querySelector(`#todo-list li:nth-child(${index + 1})`);
-  const descriptionElement = taskItem.querySelector('p');
-  const editInput = document.createElement('input');
-  editInput.type = 'text';
-  editInput.value = descriptionElement.innerText;
-  editInput.addEventListener('blur', () => {
-    tasks[index].description = editInput.value;
-    saveTasks();
-    renderTasks();
-  });
-  descriptionElement.replaceWith(editInput);
-  editInput.focus();
-}
-
 function renderTasks() {
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = ''; // clear previous items
@@ -37,8 +16,24 @@ function renderTasks() {
   tasks.forEach((task, index) => {
     const taskItem = document.createElement('li');
     taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}/><p>${task.description}</p> <i class="fa">&#xf142;</i>`;
-    taskItem.querySelector('input').addEventListener('click', () => toggleTaskCompletion(index));
-    taskItem.querySelector('p').addEventListener('click', () => editTask(index));
+    taskItem.querySelector('input').addEventListener('click', () => {
+      tasks[index].completed = !tasks[index].completed;
+      saveTasks();
+      renderTasks();
+    });
+    taskItem.querySelector('p').addEventListener('click', function editTask() {
+      const descriptionElement = this;
+      const editInput = document.createElement('input');
+      editInput.type = 'text';
+      editInput.value = descriptionElement.innerText;
+      editInput.addEventListener('blur', () => {
+        tasks[index].description = editInput.value;
+        saveTasks();
+        renderTasks();
+      });
+      descriptionElement.replaceWith(editInput);
+      editInput.focus();
+    });
 
     if (task.completed) {
       taskItem.classList.add('completed');
