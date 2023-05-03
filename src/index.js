@@ -1,8 +1,5 @@
 import './style.css';
-
-
-renderTasks();
-
+import './storage.js';
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 function renderTasks() {
@@ -13,7 +10,7 @@ function renderTasks() {
 
   tasks.forEach((task, index) => {
     const taskItem = document.createElement('li');
-    taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}/><p>${task.description}</p> <i class="fa">&#xf142;</i>`;
+    taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}>${task.description}</input> <i class="fa">&#xf142;</i>`;
     taskItem.addEventListener('click', () => toggleTaskCompletion(index));
     taskItem.querySelector('i').addEventListener('click', () => deleteTask(index));
 
