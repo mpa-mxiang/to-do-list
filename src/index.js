@@ -11,8 +11,8 @@ function renderTasks() {
   tasks.forEach((task, index) => {
     const taskItem = document.createElement('li');
     taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}>${task.description}</input> <i class="fa">&#xf142;</i>`;
-    taskItem.addEventListener('click', () => toggleTaskCompletion(index));
-    taskItem.querySelector('i').addEventListener('click', () => deleteTask(index));
+    taskItem.querySelector('input').addEventListener('click', () => toggleTaskCompletion(index));
+    taskItem.querySelector('p').addEventListener('click', () => editTask(index));
 
     if (task.completed) {
       taskItem.classList.add('completed');
@@ -34,12 +34,19 @@ function addTask(description) {
   renderTasks();
 }
 
-function deleteTask(index) {
-  tasks.splice(index, 1);
-  // Update the indexes of the remaining tasks
-  tasks.forEach((task, i) => task.index = i + 1);
-  saveTasks();
-  renderTasks();
+function editTask(index) {
+  const taskItem = document.querySelector(`#todo-list li:nth-child(${index+1})`);
+  const descriptionElement = taskItem.querySelector('p');
+  const editInput = document.createElement('input');
+  editInput.type = 'text';
+  editInput.value = descriptionElement.innerText;
+  editInput.addEventListener('blur', () => {
+    tasks[index].description = editInput.value;
+    saveTasks();
+    renderTasks();
+  });
+  descriptionElement.replaceWith(editInput);
+  editInput.focus();
 }
 
 function toggleTaskCompletion(index) {
