@@ -1,13 +1,11 @@
 import './style.css';
 import './storage.js';
+import { saveTasks, addTask, deleteTask } from './app.js';
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+export let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-function saveTasks() {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-}
 
-function renderTasks() {
+export function renderTasks() {
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = ''; // clear previous items
 
@@ -34,6 +32,7 @@ function renderTasks() {
       descriptionElement.replaceWith(editInput);
       editInput.focus();
     });
+    taskItem.querySelector('i').addEventListener('click', () => deleteTask(index));
 
     if (task.completed) {
       taskItem.classList.add('completed');
@@ -42,35 +41,5 @@ function renderTasks() {
     todoList.appendChild(taskItem);
   });
 }
-
-function addTask(description) {
-  const task = {
-    description,
-    completed: false,
-    index: tasks.length + 1,
-  };
-
-  tasks.push(task);
-  saveTasks();
-  renderTasks();
-}
-
-const newTaskForm = document.querySelector('form');
-newTaskForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const newTaskInput = newTaskForm.querySelector('.new-task-input');
-  addTask(newTaskInput.value);
-  newTaskInput.value = '';
-});
-
-const clearCompletedBtn = document.querySelector('.clear-completed-btn');
-clearCompletedBtn.addEventListener('click', () => {
-  tasks = tasks.filter((task) => !task.completed);
-  tasks.forEach((task, i) => {
-    task.index = i + 1;
-  });
-  saveTasks();
-  renderTasks();
-});
 
 renderTasks();
