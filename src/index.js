@@ -50,3 +50,4 @@ clearCompletedBtn.addEventListener('click', () => {
   localStorage.setItem('tasks', JSON.stringify(tasks));
   renderTasks();
 });
+renderTasks();
