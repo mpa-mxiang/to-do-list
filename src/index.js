@@ -3,17 +3,18 @@ import './style.css';
 import './storage.js';
 import { addTask, editTask, deleteTask } from './app.js';
 
+let tastList = tasks;
 export default function renderTasks() {
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = ''; // clear previous items
-  tasks.sort((a, b) => a.index - b.index);
-  tasks.forEach((task, index) => {
+  tastList.sort((a, b) => a.index - b.index);
+  tastList.forEach((task, index) => {
     const taskItem = document.createElement('li');
     taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}/><p>${task.description}</p> <div class="icons"> <i class="fa tri-dots">&#xf142;</i>
     <i class="fa fa-trash-o trash"></i></div>`;
     taskItem.querySelector('input').addEventListener('click', () => {
-      tasks[index].completed = !tasks[index].completed;
-      localStorage.setItem('tasks', JSON.stringify(tasks));
+      tastList[index].completed = !tastList[index].completed;
+      localStorage.setItem('tastList', JSON.stringify(tastList));
       renderTasks();
     });
     taskItem.querySelector('p').addEventListener('click', () => {
@@ -37,18 +38,18 @@ const newTaskForm = document.querySelector('form');
 newTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const newTaskInput = document.querySelector('.new-task-input');
-  addTask(tasks, newTaskInput.value);
+  addTask(tastList, newTaskInput.value);
   renderTasks();
   newTaskInput.value = '';
 });
 
 const clearCompletedBtn = document.querySelector('.clear-completed-btn');
 clearCompletedBtn.addEventListener('click', () => {
-  tasks = tasks.filter((task) => !task.completed);
-  tasks.forEach((task, i) => {
+  tastList = tastList.filter((task) => !task.completed);
+  tastList.forEach((task, i) => {
     task.index = i + 1;
   });
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tastList', JSON.stringify(tastList));
   renderTasks();
 });
 renderTasks();
