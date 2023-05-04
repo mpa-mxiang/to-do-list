@@ -22,6 +22,11 @@ h1 {
 .fa {
   font-size: 24px;
   cursor: pointer;
+  width: 10px;
+}
+
+.icons {
+  width: 10px;
 }
 
 .icons:hover .tri-dots,
