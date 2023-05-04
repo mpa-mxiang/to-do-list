@@ -4,7 +4,6 @@ import './storage.js';
 import { addTask, editTask, deleteTask } from './app.js';
 
 export default function renderTasks() {
-  console.log("render")
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = ''; // clear previous items
   tasks.sort((a, b) => a.index - b.index);

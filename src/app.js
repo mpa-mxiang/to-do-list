@@ -1,7 +1,6 @@
 import tasks from './tasks.js';
 
 export function addTask(tasks, description) {
-  console.log('add');
   const task = {
     description,
     completed: false,
@@ -12,7 +11,6 @@ export function addTask(tasks, description) {
 }
 
 export function editTask(index) {
-  console.log('edit');
   const taskItem = document.querySelector(`#todo-list li:nth-child(${index + 1})`);
   const descriptionElement = taskItem.querySelector('p');
   const editInput = document.createElement('input');
@@ -27,7 +25,6 @@ export function editTask(index) {
 }
 
 export function deleteTask(index) {
-  console.log('delete');
   tasks.splice(index, 1);
   // Update the indexes of the remaining tasks
   tasks.forEach((task, i) => {
