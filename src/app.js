@@ -10,19 +10,6 @@ export function addTask(tasks, description) {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-export function editTask(index) {
-  const taskItem = document.querySelector(`#todo-list li:nth-child(${index + 1})`);
-  const descriptionElement = taskItem.querySelector('p');
-  const editInput = document.createElement('input');
-  editInput.type = 'text';
-  editInput.value = descriptionElement.innerText;
-  editInput.addEventListener('blur', () => {
-    tasks[index].description = editInput.value;
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  });
-  descriptionElement.replaceWith(editInput);
-  editInput.focus();
-}
 
 export function deleteTask(index) {
   tasks.splice(index, 1);

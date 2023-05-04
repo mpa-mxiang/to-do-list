@@ -1,7 +1,7 @@
 import tasks from './tasks.js';
 import './style.css';
 import './storage.js';
-import { addTask, editTask, deleteTask } from './app.js';
+import { addTask, deleteTask } from './app.js';
 
 let tastList = tasks;
 export default function renderTasks() {
@@ -17,13 +17,18 @@ export default function renderTasks() {
       localStorage.setItem('tastList', JSON.stringify(tastList));
       renderTasks();
     });
-    taskItem.querySelector('p').addEventListener('click', () => {
-      editTask(index);
-      renderTasks();
-    });
-    taskItem.querySelector('div').addEventListener('click', () => {
-      deleteTask(index);
-      renderTasks();
+    taskItem.querySelector('p').addEventListener('click', function editTask() {
+      const descriptionElement = this;
+      const editInput = document.createElement('input');
+      editInput.type = 'text';
+      editInput.value = descriptionElement.innerText;
+      editInput.addEventListener('blur', () => {
+        tastList[index].description = editInput.value;
+        localStorage.setItem('tastList', JSON.stringify(tastList));
+        renderTasks();
+      });
+      descriptionElement.replaceWith(editInput);
+      editInput.focus();
     });
 
     if (task.completed) {
