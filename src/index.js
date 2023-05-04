@@ -31,6 +31,11 @@ export default function renderTasks() {
       editInput.focus();
     });
 
+    taskItem.querySelector('div').addEventListener('click', () => {
+      deleteTask(index);
+      renderTasks();
+    });
+
     if (task.completed) {
       taskItem.classList.add('completed');
     }

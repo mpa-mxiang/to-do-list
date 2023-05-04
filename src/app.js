@@ -10,7 +10,6 @@ export function addTask(tasks, description) {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
-
 export function deleteTask(index) {
   tasks.splice(index, 1);
   // Update the indexes of the remaining tasks
