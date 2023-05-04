@@ -21,6 +21,16 @@ h1 {
 
 .fa {
   font-size: 24px;
+  cursor: pointer;
+}
+
+.icons:hover .tri-dots,
+.icons .trash {
+  display: none;
+}
+
+.icons:hover .trash {
+  display: inline;
 }
 
 header,
