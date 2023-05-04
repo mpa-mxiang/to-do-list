@@ -38,6 +38,7 @@ newTaskForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const newTaskInput = document.querySelector('.new-task-input');
   addTask(tasks, newTaskInput.value);
+  renderTasks();
   newTaskInput.value = '';
 });
 
