@@ -1,5 +1,5 @@
 const typedTodo = document.querySelector('.new-task-input');
-const todos = document.getElementById('todo-form');
+const todos = document.querySelector('form');
 const todoData = JSON.parse(localStorage.getItem('todoData')) || { todo: '' }; // Initialize todoData with an empty todo property
 const savedData = JSON.parse(localStorage.getItem('todoData'));
 if (savedData) {
