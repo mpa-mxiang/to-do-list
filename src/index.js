@@ -2,7 +2,7 @@ import tasks from './tasks.js';
 import './style.css';
 import './storage.js';
 import { addTask, deleteTask } from './app.js';
-import { updateStatus, clearCompleted } from './update.js';
+import { updateStatus } from './update.js';
 
 const tastList = tasks;
 export default function renderTasks() {
@@ -14,7 +14,8 @@ export default function renderTasks() {
     taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}/><p>${task.description}</p> <div class="icons"> <i class="fa tri-dots">&#xf142;</i>
     <i class="fa fa-trash-o trash"></i></div>`;
     taskItem.querySelector('input').addEventListener('change', (event) => {
-      updateStatus(index, event.target.checked);
+      console.log(event.target.checked)
+      updateStatus(tastList, index, event.target.checked);
       localStorage.setItem('tastList', JSON.stringify(tastList));
       renderTasks();
     });
@@ -56,7 +57,11 @@ newTaskForm.addEventListener('submit', (event) => {
 
 const clearCompletedBtn = document.querySelector('.clear-completed-btn');
 clearCompletedBtn.addEventListener('click', () => {
-  clearCompleted();
+  tastList = tastList.filter((task) => !task.completed);
+  tastList.forEach((task, i) => {
+    task.index = i + 1;
+  });
+  localStorage.setItem('tastList', JSON.stringify(tastList));
   renderTasks();
 });
 renderTasks();
