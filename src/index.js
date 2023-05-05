@@ -14,9 +14,7 @@ export default function renderTasks() {
     taskItem.innerHTML += `<input class='checkbox' type="checkbox" ${task.completed ? 'checked' : ''}/><p>${task.description}</p> <div class="icons"> <i class="fa tri-dots">&#xf142;</i>
     <i class="fa fa-trash-o trash"></i></div>`;
     taskItem.querySelector('input').addEventListener('change', (event) => {
-      console.log(event.target.checked)
       updateStatus(tastList, index, event.target.checked);
-      localStorage.setItem('tastList', JSON.stringify(tastList));
       renderTasks();
     });
     taskItem.querySelector('p').addEventListener('click', function editTask() {
@@ -57,11 +55,7 @@ newTaskForm.addEventListener('submit', (event) => {
 
 const clearCompletedBtn = document.querySelector('.clear-completed-btn');
 clearCompletedBtn.addEventListener('click', () => {
-  tastList = tastList.filter((task) => !task.completed);
-  tastList.forEach((task, i) => {
-    task.index = i + 1;
-  });
-  localStorage.setItem('tastList', JSON.stringify(tastList));
+
   renderTasks();
 });
 renderTasks();

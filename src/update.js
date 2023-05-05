@@ -3,8 +3,10 @@ export function updateStatus(tastList, index, completed) {
     localStorage.setItem('tastList', JSON.stringify(tastList));
 }
 
-export function clearCompleted() {
-    let items = JSON.parse(localStorage.getItem('items'));
-    items = items.filter(item => !item.completed);
-    localStorage.setItem('items', JSON.stringify(items));
+export function clearCompleted(tastList) {
+    tastList = tastList.filter((task) => !task.completed);
+    tastList.forEach((task, i) => {
+      task.index = i + 1;
+    });
+    localStorage.setItem('tastList', JSON.stringify(tastList));
 }
