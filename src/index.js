@@ -2,9 +2,9 @@ import tasks from './tasks.js';
 import './style.css';
 import './storage.js';
 import { addTask, deleteTask } from './app.js';
-import { updateStatus } from './update.js';
+import { updateStatus, clearCompleted } from './update.js';
 
-const tastList = tasks;
+let tastList = tasks;
 export default function renderTasks() {
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = ''; // clear previous items
@@ -55,7 +55,7 @@ newTaskForm.addEventListener('submit', (event) => {
 
 const clearCompletedBtn = document.querySelector('.clear-completed-btn');
 clearCompletedBtn.addEventListener('click', () => {
-
+  tastList = clearCompleted(tastList);
   renderTasks();
 });
 renderTasks();
