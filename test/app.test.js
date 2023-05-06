@@ -1,5 +1,12 @@
 import { addTask, deleteTask } from '../src/app.js';
+import localStorageMock from './localStorageMock';
 
+// set localStorage to the mock object before running the tests
+beforeEach(() => {
+  Object.defineProperty(window, 'localStorage', {
+    value: localStorageMock,
+  });
+});
 describe('addTask function', () => {
     // create a mock localStorage object
     const localStorageMock = (() => {
