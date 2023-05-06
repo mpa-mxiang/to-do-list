@@ -22,6 +22,7 @@
   },
   "scripts": {
     "start": "webpack serve --open",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "jest"
   }
 }
