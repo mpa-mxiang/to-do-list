@@ -1,5 +1,5 @@
 import { addTask, deleteTask } from '../src/app.js';
-import localStorageMock from './localStorageMock';
+import localStorageMock from '../_mocks_/localStorageMock';
 
 // set localStorage to the mock object before running the tests
 beforeEach(() => {
@@ -8,22 +8,6 @@ beforeEach(() => {
   });
 });
 describe('addTask function', () => {
-    // create a mock localStorage object
-    const localStorageMock = (() => {
-      let store = {};
-      return {
-        getItem: key => store[key] || null,
-        setItem: (key, value) => {
-          store[key] = value.toString();
-        },
-        clear: () => {
-          store = {};
-        },
-        removeItem: (key) => {
-          delete store[key];
-        }
-      };
-    })();
     
     // create a mock todo list
     const tastList = [
@@ -46,14 +30,14 @@ describe('addTask function', () => {
     `;
     
     // set localStorage
-    localStorage.setItem('tastList', JSON.stringify(tastList));
+    localStorageMock.setItem('tastList', JSON.stringify(tastList));
   
     test('adds a new task to the list and localStorage', () => {
       // call the addTask function with a new task
       addTask(tastList, 'Task 3');
       
       // get the updated tastList from localStorage
-      const updatedTastList = JSON.parse(localStorage.getItem('tastList'));
+      const updatedTastList = JSON.parse(localStorageMock.getItem('tastList'));
   
       // get the todo list from the DOM
       const todoList = document.getElementById('todo-list');
@@ -72,22 +56,6 @@ describe('addTask function', () => {
   });
 
   describe('deleteTask function', () => {
-    // create a mock localStorage object
-    const localStorageMock = (() => {
-      let store = {};
-      return {
-        getItem: key => store[key] || null,
-        setItem: (key, value) => {
-          store[key] = value.toString();
-        },
-        removeItem: (key) => {
-          delete store[key];
-        },
-        clear: () => {
-          store = {};
-        },
-      };
-    })();
   
     beforeEach(() => {
       // set up our document body
