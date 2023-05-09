@@ -1,13 +1,14 @@
-import tasks from './tasks.js';
+import { getItem, setItem } from '../_mocks_/localStorageMock';
 
-export function addTask(tasks, description) {
+let tasks = JSON.parse(getItem('tasks')) || [];
+export function addTask(description) {
   const task = {
     description,
     completed: false,
     index: tasks.length + 1,
   };
   tasks.push(task);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorageMock.setItem('tasks', JSON.stringify(tasks));
 }
 
 export function deleteTask(index) {
@@ -17,5 +18,7 @@ export function deleteTask(index) {
     task.index = i + 1;
     return task;
   });
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorageMock.setItem('tasks', JSON.stringify(tasks));
 }
+
+export default tasks;

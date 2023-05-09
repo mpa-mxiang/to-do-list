@@ -1,22 +1,29 @@
 const localStorageMock = (() => {
   let store = {};
-
   return {
-    getItem: (key) => {
-      console.log(`Getting item ${key} from mock storage`);
-      return store[key] || {};
+    getItem: key => {
+      const value = store[key];
+      return value ? { [key]: value } : null;
     },
     setItem: (key, value) => {
-      console.log(`Setting item ${key} to ${value} in mock storage`);
-      store[key] = value.toString();
+      store[key] = value;
     },
-    clear: () => {
-      console.log(`Clearing mock storage`);
-      store = {};
-    },
-    removeItem: (key) => {
-      console.log(`Removing item ${key} from mock storage`);
+    removeItem: key => {
       delete store[key];
     },
+    clear: () => {
+      store = {};
+    }
   };
 })();
+export const getItem = localStorageMock.getItem;
+export const setItem = localStorageMock.setItem;
+
+
+// set localStorage to the mock object before running the tests
+beforeEach(() => {
+  Object.defineProperty(window, 'localStorage', {
+    value: localStorageMock,
+  });
+});
+export default localStorageMock;
