@@ -1,10 +1,9 @@
-import localStorageMock, { getItem, setItem } from '../_mocks_/localStorageMock';
 import { addTask, deleteTask } from '../src/app.js';
 
 // set localStorage to the mock object before running the tests
 beforeEach(() => {
   Object.defineProperty(window, 'localStorage', {
-    value: localStorageMock,
+    value: localStorage,
   });
 });
 describe('addTask function', () => {
@@ -29,15 +28,13 @@ describe('addTask function', () => {
       </ul>
     `;
     
-    // set localStorage
-    localStorageMock.setItem('tastList', JSON.stringify(tastList));
   
     test('adds a new task to the list and localStorage', () => {
       // call the addTask function with a new task
       addTask(tastList, 'Task 3');
       
       // get the updated tastList from localStorage
-      const updatedTastList = JSON.parse(localStorageMock.getItem('tastList'));
+      const updatedTastList = JSON.parse(localStorage.getItem('tastList'));
   
       // get the todo list from the DOM
       const todoList = document.getElementById('todo-list');
@@ -60,7 +57,7 @@ describe('addTask function', () => {
     deleteTask(indexToDelete);
     const list = document.getElementById('todo-list');
     expect(list.children.length).toBe(3); // make sure no element was removed from list
-    const storedList = JSON.parse(localStorageMock.getItem('tasksList'));
+    const storedList = JSON.parse(localStorage.getItem('tasksList'));
     expect(storedList.length).toBe(3); // make sure no element was removed from localStorage
     expect(storedList[0].description).toBe('Task 1'); // make sure other elements are still in list
     expect(storedList[1].description).toBe('Task 2');

@@ -1,6 +1,4 @@
-import { getItem, setItem } from '../_mocks_/localStorageMock';
-
-let tasks = JSON.parse(getItem('tasks')) || [];
+import tasks from "./tasks";
 export function addTask(description) {
   const task = {
     description,
