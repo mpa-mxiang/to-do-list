@@ -24,7 +24,7 @@ export default function renderTasks() {
       editInput.value = descriptionElement.innerText;
       editInput.addEventListener('blur', () => {
         tastList[index].description = editInput.value;
-        localStorage.setItem('tastList', JSON.stringify(tastList));
+        localStorage.setItem('tastList', JSON.stringify(tasks));
         renderTasks();
       });
       descriptionElement.replaceWith(editInput);

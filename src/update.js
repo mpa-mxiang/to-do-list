@@ -1,6 +1,6 @@
 export function updateStatus(tastList, index, completed) {
   tastList[index].completed = completed;
-  localStorage.setItem('tasks', JSON.stringify(tastList));
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 export function clearCompleted(tastList) {
@@ -10,6 +10,6 @@ export function clearCompleted(tastList) {
     task.index = i + 1;
   });
 
-  localStorage.setItem('tasks', JSON.stringify(tastList));
+  localStorage.setItem('tasks', JSON.stringify(tasks));
   return tastList;
 }
