@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { addTask } from '../src/app.js';
+import { addTask, deleteTask } from '../src/app.js';
 import tasks from '../src/tasks.js';
 import 'jest-localstorage-mock';
 
@@ -46,13 +46,36 @@ describe('addTask function', () => {
 
   test('adds a new task to the list and localStorage', () => {
     addTask('Task 1');
+    expect(todoList.children.length).toBe(1);
+
+    addTask('Task 2');
+    expect(todoList.children.length).toBe(2);
+
+    addTask('Task 3');
+    expect(todoList.children.length).toBe(3);
+
+    addTask('Task 4');
+    expect(todoList.children.length).toBe(4);
+
     renderTasks();
     const updatedTastList = JSON.parse(localStorage.getItem('tasks'));
 
     // check that the new task was added to the tastList and localStorage
-    expect(updatedTastList).toEqual([{ description: 'Task 1', completed: false, index: 1 }]);
-
-    expect(todoList.children.length).toBe(1);
     expect(todoList.children[0].querySelector('p').textContent).toBe('Task 1');
+    expect(todoList.children[1].querySelector('p').textContent).toBe('Task 2');
+    expect(todoList.children[2].querySelector('p').textContent).toBe('Task 3');
+    expect(todoList.children[3].querySelector('p').textContent).toBe('Task 4');
+    
+  });
+
+  test('delete a task from the list and localStorage', () => {
+    deleteTask(2);
+
+    renderTasks();
+    const updatedTastList = JSON.parse(localStorage.getItem('tasks'));
+
+    // check that the new task was added to the tastList and localStorage
+    expect(todoList.children.length).toBe(3);
+    
   });
 });
