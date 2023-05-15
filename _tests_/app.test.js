@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import { addTask } from '../src/app.js';
+import { addTask, deleteTask } from '../src/app.js';
 import tasks from '../src/tasks.js';
 import 'jest-localstorage-mock';
 
@@ -55,19 +55,31 @@ describe('addTask function', () => {
     expect(todoList.children.length).toBe(1);
     expect(todoList.children[0].querySelector('p').textContent).toBe('Task 1');
   });
-
   test('deletes a task from the list and localStorage', () => {
     addTask('Task 1');
+  
     addTask('Task 2');
-    renderTasks();
-
+    renderTasks(); 
+    const updatedTaskList = JSON.parse(localStorage.getItem('tasks'));
+  
+    expect(updatedTaskList).toEqual([
+      { description: 'Task 1', completed: false, index: 1 },
+      { description: 'Task 2', completed: false, index: 2 },
+    ]);
+  
+    expect(todoList.children.length).toBe(2);
+    expect(todoList.children[1].querySelector('p').textContent).toBe('Task 2');
+  
     deleteTask(0);
     renderTasks();
-    const updatedTaskList = JSON.parse(localStorage.getItem('tasks'));
-
-    expect(updatedTaskList).toEqual([{ description: 'Task 2', completed: false, index: 1 }]);
-
+  
+    expect(updatedTaskList).toEqual([
+      { description: 'Task 2', completed: false, index: 2 },
+    ]);
+  
     expect(todoList.children.length).toBe(1);
     expect(todoList.children[0].querySelector('p').textContent).toBe('Task 2');
   });
+  
+
 });
