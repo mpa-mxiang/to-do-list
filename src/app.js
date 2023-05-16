@@ -15,7 +15,6 @@ export function deleteTask(index) {
   // Update the indexes of the remaining tasks
   tasks.forEach((task, i) => {
     task.index = i + 1;
-    return task;
   });
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
