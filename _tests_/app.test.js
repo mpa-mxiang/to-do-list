@@ -70,4 +70,17 @@ describe('addTask function', () => {
     renderTasks();
     expect(todoList.children[2].querySelector('input').checked).toBe(true);
   });
+
+  test('clear completed tasks from the list and localStorage', () => {
+    addTask('Task 1');
+    addTask('Task 2');
+    addTask('Task 3');
+    addTask('Task 4');
+    updateStatus(tasks, 2, true);
+    updateStatus(tasks, 3, true);
+    const buffer = clearCompleted(tasks);
+    renderTasks();
+    expect(buffer).toHaveLength(2);
+
+  });
 });
