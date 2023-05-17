@@ -1,3 +1,5 @@
+import tasks from './tasks.js';
+
 export function updateStatus(tastList, index, completed) {
   tastList[index].completed = completed;
   localStorage.setItem('tasks', JSON.stringify(tasks));
