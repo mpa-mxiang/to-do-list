@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import { addTask, deleteTask } from '../src/app.js';
 import tasks from '../src/tasks.js';
-import { updateStatus, clearCompleted } from '../src/update.js';
+import { updateStatus, clearCompleted, editTask } from '../src/update.js';
 let todoList;
 let taskItem;
 const renderTasks = jest.fn(() => {
@@ -82,5 +82,15 @@ describe('addTask function', () => {
     renderTasks();
     expect(buffer).toHaveLength(2);
 
+  });
+
+  test('edits a task from the list and localStorage', () => {
+    addTask('Task 1');
+    addTask('Task 2');
+    addTask('Task 3');
+    addTask('Task 4');
+    editTask(tasks, 2, 'new description');
+    renderTasks();
+    expect(todoList.children[2].querySelector('p').textContent).toBe('new description');
   });
 });
