@@ -13,3 +13,9 @@ export function clearCompleted(tastList) {
   localStorage.setItem('tasks', JSON.stringify(tastList));
   return tastList;
 }
+
+export function editTask(taskt, index, description) {
+  taskt[index].description = description;
+  localStorage.setItem('tasks', JSON.stringify(taskt));
+}
+
