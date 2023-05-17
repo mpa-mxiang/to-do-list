@@ -17,7 +17,7 @@ export default function renderTasks() {
       updateStatus(tastList, index, event.target.checked);
       renderTasks();
     });
-    taskItem.querySelector('p').addEventListener('click', function () {
+    taskItem.querySelector('p').addEventListener('click', () => {
       const descriptionElement = this;
       const editInput = document.createElement('input');
       editInput.type = 'text';

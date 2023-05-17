@@ -18,4 +18,3 @@ export function editTask(taskt, index, description) {
   taskt[index].description = description;
   localStorage.setItem('tasks', JSON.stringify(taskt));
 }
-
