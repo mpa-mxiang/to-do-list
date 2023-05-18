@@ -20,7 +20,7 @@ const renderTasks = jest.fn(() => {
   });
 });
 
-describe('addTask function', () => {
+describe('task list logic', () => {
   beforeEach(() => {
     const dom = new JSDOM(`
       <!DOCTYPE html>
