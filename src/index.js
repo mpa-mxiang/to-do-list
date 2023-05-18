@@ -2,7 +2,7 @@ import tasks from './tasks.js';
 import './style.css';
 import './storage.js';
 import { addTask, deleteTask } from './app.js';
-import { updateStatus, clearCompleted } from './update.js';
+import { updateStatus, clearCompleted, editTask } from './update.js';
 
 let tastList = tasks;
 export default function renderTasks() {
@@ -17,14 +17,13 @@ export default function renderTasks() {
       updateStatus(tastList, index, event.target.checked);
       renderTasks();
     });
-    taskItem.querySelector('p').addEventListener('click', function editTask() {
+    taskItem.querySelector('p').addEventListener('click', () => {
       const descriptionElement = this;
       const editInput = document.createElement('input');
       editInput.type = 'text';
       editInput.value = descriptionElement.innerText;
       editInput.addEventListener('blur', () => {
-        tastList[index].description = editInput.value;
-        localStorage.setItem('tastList', JSON.stringify(tasks));
+        editTask(tastList, index, editInput.value);
         renderTasks();
       });
       descriptionElement.replaceWith(editInput);
